@@ -4,8 +4,6 @@
  * DB class for interacting with the database. DB credentials found in config/config.php
  */
 
-use \PDO; 
-
 class DB {
     
     private $host = DBHOST;
@@ -31,20 +29,32 @@ class DB {
             die("Database connection failed: " . $e->getMessage());
         }
     }
-   
-    public function execute( string $sql, array $params = [] ) {
+
+    /**
+     * Execute an SQL command on the database and fetch the results as an associative array.
+     *
+     * @param string $sql The SQL command to execute.
+     * @param array $params An optional array of parameters for prepared statements.
+     * @return array|false Returns an associative array of results on success or false on failure.
+     */
+    public function execute( string $sql, array $params = [] )
+    {
         try {
             $statement = $this->connection->prepare( $sql );
             $result = $statement->execute( $params );
-            
+
             if ( $result ) {
-                return $result;
+                // Fetch the results as an associative array
+                $data = $statement->fetchAll( PDO::FETCH_ASSOC );
+                return $data;
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
+        } catch ( PDOException $e ) {
+            // Handle any exceptions or errors here (e.g., log the error)
             return false;
         }
     }
+
 
 }
