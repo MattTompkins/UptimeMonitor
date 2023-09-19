@@ -1,11 +1,14 @@
 <?php
 
+namespace UptimeMonitor\Classes;
+
+use PDO;
+
 /**
  * DB class for interacting with the database. DB credentials found in config/config.php
  */
 
 class DB {
-    
     private $host = DBHOST;
     private $user = DBUSER;
     private $port = DBPORT;
@@ -43,7 +46,7 @@ class DB {
             $statement = $this->connection->prepare( $sql );
             $result = $statement->execute( $params );
 
-            if ( $result ) {
+            if ($result ) {
                 // Fetch the results as an associative array
                 $data = $statement->fetchAll( PDO::FETCH_ASSOC );
                 return $data;

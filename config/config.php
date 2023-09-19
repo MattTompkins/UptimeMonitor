@@ -4,8 +4,8 @@
  */
 
 /** Database */
-define( 'DBHOST','localhost' );
+define( 'DBHOST','127.0.0.1' );
 define( 'DBPORT', '3306' );
-define( 'DBUSER','username' );
-define( 'DBPASSWORD','password' );
-define( 'DBNAME','database name' );
+define( 'DBUSER','root' );
+define( 'DBPASSWORD','' );
+define( 'DBNAME','uptime' );
