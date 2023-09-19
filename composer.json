@@ -1,0 +1,20 @@
+{
+    "name": "matt_tompkins/uptime_monitor",
+    "description": "A package for monitoring the uptime and other parameters of your website/web app",
+    "type": "project",
+    "license": "MIT License",
+    "autoload": {
+        "psr-4": {
+            "MattTompkins\\UptimeMonitor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matt Tompkins",
+            "email": "matt@mattompkins.co.uk"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
