@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', dirname( __DIR__ ) );
+define( 'ROOT', dirname( __DIR__ ) );
 
 // Autoload the application classes
 require_once ROOT . '/config/config.php';
@@ -20,4 +20,9 @@ $router->get('/about', function() {
     echo "abt";
 });
 
+$router->handlerNotFound( function() {
+    require_once( '../templates/404.php' );
+});
+
 $router->run();
+

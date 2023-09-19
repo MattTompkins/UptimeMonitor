@@ -6,6 +6,7 @@ namespace UptimeMonitor\Classes;
 class Router {
 
     private $handlers;
+    private $notFoundHandler;
     private const METHOD_POST = 'POST';
     private const METHOD_GET  = 'GET';
 
@@ -25,6 +26,10 @@ class Router {
         ];
     }
 
+    public function handlerNotFound( $handler ) : void {
+        $this->notFoundHandler = $handler;
+    }
+
     public function run() {
         $requestUri = parse_url( $_SERVER['REQUEST_URI'] );
         $requestPath = $requestUri['path'];
@@ -34,13 +39,19 @@ class Router {
 
         foreach ( $this->handlers as $handler ) {
             if ( $handler['path'] === $requestPath && $method === $handler['method'] ) {
-                $callback = $handler['hander'];
+                $callback = $handler['handler'];
+            }
+        }
+
+        if ( ! $callback ) {
+            header( 'HTTP/1.0 404 Not Found' );
+            if ( ! empty( $this->notFoundHandler ) ) {
+                $callback = $this->notFoundHandler;
             }
         }
 
         call_user_func_array( $callback, [
             array_merge( $_GET, $_POST )
         ]);
-        var_dump($requestPath);
     }
 }
