@@ -4,7 +4,7 @@ define('ROOT', dirname( __DIR__ ) );
 
 // Autoload the application classes
 
-require ROOT . '/vendor/autoload.php';
+require_once ROOT . '/vendor/autoload.php';
+require_once ROOT . '/src/autoload.php';
 
-echo ROOT;
 // Run the application
