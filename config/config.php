@@ -1,10 +1,9 @@
 <?php
-
-/** 
- *  Database congig file for a MySQL Database.
- *  Replace the details below with the correct credentials
+/**
+ * Configuration file for the application
  */
 
+/** Database */
 define( 'DBHOST','localhost' );
 define( 'DBUSER','username' );
 define( 'DBPASSWORD','password' );
