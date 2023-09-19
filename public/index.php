@@ -10,9 +10,14 @@ require_once ROOT . '/vendor/autoload.php';
 use UptimeMonitor\Classes\DB;
 use UptimeMonitor\Classes\Router;
 
-$test = new DB; 
-
-print_r( $test->execute( 'SELECT * FROM users' ) );
-
 // Run the application
 $router = new Router;
+$router->get('/', function() {
+    echo "homepage";
+});
+
+$router->get('/about', function() {
+    echo "abt";
+});
+
+$router->run();

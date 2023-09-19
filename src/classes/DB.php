@@ -3,6 +3,7 @@
 namespace UptimeMonitor\Classes;
 
 use PDO;
+use PDOException;
 
 /**
  * DB class for interacting with the database. DB credentials found in config/config.php
@@ -58,6 +59,4 @@ class DB {
             return false;
         }
     }
-
-
 }
