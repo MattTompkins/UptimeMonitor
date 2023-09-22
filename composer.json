@@ -5,7 +5,7 @@
     "license": "MIT License",
     "autoload": {
         "psr-4": {
-            "UptimeMonitor\\": "src/"
+            "UptimeMonitor\\": "app/"
         }
     },
     "authors": [

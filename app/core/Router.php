@@ -1,7 +1,7 @@
 <?php
 declare( strict_types=1 );
 
-namespace UptimeMonitor\Classes;
+namespace UptimeMonitor\Core;
 
 class Router {
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace UptimeMonitor\Classes;
+namespace UptimeMonitor\Core;
 
 use PDO;
 use PDOException;
+use Exception;
 
 /**
  * DB class for interacting with the database. DB credentials found in config/config.php
@@ -28,9 +29,9 @@ class DB {
         $dataSourceName = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName . ';port=' . $this->port . ';charset=utf8mb4';
         
         try {
-            $this->connection = new PDO($dataSourceName, $this->user, $this->password, $this->dbOptions);
-        } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
+            $this->connection = new PDO( $dataSourceName, $this->user, $this->password, $this->dbOptions );
+        } catch ( PDOException $e ) {
+            die( throw new Exception( "Database connection failed: " . $e->getMessage() ) );
         }
     }
 
