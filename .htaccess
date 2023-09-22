@@ -1,3 +1,6 @@
 RewriteEngine On
+RewriteBase /
+
+# Redirect requests to index.php in /public directory
 RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ /public/$1 [L]
+RewriteRule ^(.*)$ /public/index.php [L]
