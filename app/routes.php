@@ -16,7 +16,7 @@ $router->get('/about', function() {
 });
 
 $router->handlerNotFound( function() {
-    require_once( '../templates/404.php' );
+    throw new Exception("Error 404 - This page does not exist.");
 });
 
 $router->run();

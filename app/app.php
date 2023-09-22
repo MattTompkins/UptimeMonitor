@@ -1,7 +1,7 @@
 <?php
 
-use UptimeMonitor\Core\Helpers;
 use UptimeMonitor\Core\DB;
+use UptimeMonitor\Core\View;
 
 /**
  * Run the application
@@ -14,10 +14,16 @@ function runApp() {
     try {
         new DB; 
     } catch( Exception $e ) {
-        echo 'error';
+        View::load( 'error', [ 'error' => $e ] );
+        die();
     }
 
-    // Load router
-    require_once('routes.php');
+    try {
+        // Load router
+        require_once( 'routes.php' );
+    } catch( Exception $e ) {
+        View::load( 'error', [ 'error' => $e ] );
+        die();
+    }
 
 }
