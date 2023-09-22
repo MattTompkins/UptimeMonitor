@@ -1,7 +1,8 @@
 <?php
 
 define( 'ROOT', dirname( __DIR__ ) );
-define('VIEWS', dirname(__DIR__) . '/public/views/');
+define( 'ASSET', dirname( __DIR__ ) . '/public/assets/' );
+define( 'VIEWS', dirname( __DIR__ ) . '/public/views/' );
 
 // Autoload the application classes
 require_once ROOT . '/config/config.php';
