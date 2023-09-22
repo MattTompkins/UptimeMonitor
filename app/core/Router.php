@@ -19,9 +19,18 @@ class Router {
     }
 
     private function addHandler( string $method, string $path, $handler ) : void {
-        $this->handlers[$method . $path] = [
-            'path'    => $path,
-            'method'  => $method,
+  
+        // Standard URL
+        $this->handlers[$method . $path ] = [
+            'path' => $path,
+            'method' => $method,
+            'handler' => $handler,
+        ];
+
+        // URL with trailing slash
+        $this->handlers[$method . $path . '/'] = [
+            'path' => $path . '/',
+            'method' => $method,
             'handler' => $handler,
         ];
     }
