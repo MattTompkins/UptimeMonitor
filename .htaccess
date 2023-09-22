@@ -1,6 +1,11 @@
 RewriteEngine On
 RewriteBase /
 
+# Force trailing slash on all URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ /$1/ [L,R=301]
+
 # Redirect requests to index.php in /public directory
 RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ /public/index.php [L]
