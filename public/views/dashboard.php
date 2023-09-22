@@ -16,7 +16,19 @@
 
 		</section>
 
-		<section class="w-full max-w-screen-xl px-4 mx-auto lg:px-12">
+		<?php if (isset($message)) : ?>
+			<section class="w-full max-w-screen-xl px-4 mx-auto lg:px-12 mb-4">
+				<a href="<?php APP_URL; ?>/create-monitor" class="flex flex-col items-center py-6 bg-gray-800/25 backdrop-blur-md rounded-lg shadow md:flex-row hover:backdrop-blur-xl">
+					
+					
+						<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-100 mx-auto"><?php echo $message; ?></h5>
+						
+			
+				</a>
+			</section>
+		<?php endif; ?>
+
+		<section class="w-full max-w-screen-xl px-4 mx-auto lg:px-12 mb-4">
 			<a href="<?php APP_URL; ?>/create-monitor" class="flex flex-col items-center py-6 bg-gray-800/25 backdrop-blur-md rounded-lg shadow md:flex-row hover:backdrop-blur-xl">
 				<div class="px-12 text-white">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">

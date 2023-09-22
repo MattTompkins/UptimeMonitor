@@ -3,6 +3,7 @@
  * Routes for the application.
  */
 
+use UptimeMonitor\Core\Install;
 use UptimeMonitor\Core\Router;
 use UptimeMonitor\Core\View;
 
@@ -19,6 +20,10 @@ $router->get('/create-monitor', function() {
 
 $router->get('/about', function() {
     echo "abt";
+});
+
+$router->get('/install', function(){
+    Install::install();
 });
 
 $router->handlerNotFound( function() {
