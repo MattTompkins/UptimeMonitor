@@ -1,13 +1,6 @@
 RewriteEngine On
 RewriteBase /
 
-# Allow access to /public/assets and its subdirectories
-RewriteRule ^public/assets/ - [L]
-
-# Redirect all other requests to /public/
-RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ /public/$1 [L]
-
 # Force trailing slash on all URLs except those under /public/assets
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/public/assets/
@@ -17,3 +10,10 @@ RewriteRule ^(.*)$ /$1/ [L,R=301]
 # Redirect requests to index.php in /public directory
 RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ /public/index.php [L]
+
+# Allow access to /public/assets and its subdirectories
+RewriteRule ^public/assets/ - [L]
+
+# Redirect all other requests to /public/
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
