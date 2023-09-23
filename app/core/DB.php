@@ -60,4 +60,14 @@ class DB {
             return false;
         }
     }
+
+     /**
+     * Close the database connection.
+     *
+     * @return void
+     */
+    public function close()
+    {
+        $this->connection = null;
+    }
 }

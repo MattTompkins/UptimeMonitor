@@ -10,7 +10,11 @@ use UptimeMonitor\Core\View;
 
 class Install
 {
-
+    /**
+     * Create the database and installation operations
+     *
+     * @return void
+     */
     public static function install()
     {
         $db = new DB();
@@ -18,6 +22,9 @@ class Install
         $sql = "CREATE TABLE `". DBNAME ."`.`sites` (`id` INT NOT NULL AUTO_INCREMENT, `name` TEXT NOT NULL, `URL` TEXT NOT NULL, PRIMARY KEY (`id`))";
         $result = $db->execute($sql);
 
-        View::load('dashboard', [ 'message' => 'Installation has been successful. Database tables have been created.' ]);
+        View::load('dashboard', [ 
+            'message'    => 'Installation has been successful. Database tables have been created.',
+            'page_title' => 'Install complete',
+        ]);
     }
 }
