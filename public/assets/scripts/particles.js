@@ -1505,15 +1505,16 @@ window.particlesJS = function (tag_id, params) {
     var canvas_el = document.createElement('canvas');
     canvas_el.className = pJS_canvas_class;
 
-    /* set size canvas */
-    canvas_el.style.width = "100%";
-    canvas_el.style.height = "100%";
+    /* Set canvas dimensions to match the body element's dimensions */
+    var body = document.body;
+    canvas_el.style.width = body.clientWidth + "px";
+    canvas_el.style.height = body.clientHeight + "px";
 
-    /* append canvas */
-    var canvas = document.getElementById(tag_id).appendChild(canvas_el);
+    /* Find the <body> element and append canvas as the first child */
+    body.insertBefore(canvas_el, body.firstChild);
 
     /* launch particle.js */
-    if (canvas != null) {
+    if (canvas_el != null) {
         pJSDom.push(new pJS(tag_id, params));
     }
 
