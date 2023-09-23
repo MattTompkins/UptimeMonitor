@@ -18,6 +18,14 @@
 			</a>
 		</section>
 
+		<?php 
+		if ( isset( $sites ) ) : 
+			foreach ( $sites as $site ) :
+				include( 'components/dashboard-site-card.php');
+			endforeach;
+		 endif;
+		?>
+
 
 	</div>
 </div>

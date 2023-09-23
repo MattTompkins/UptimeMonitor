@@ -10,4 +10,4 @@
 
     <link rel="stylesheet" href="<?php echo ASSET_DIR; ?>styles/style.css"> 
 </head>
-<body class="bg-slate-900" id="particles-js">
+<body class="bg-slate-900 background-wrapper" id="particles-js">
