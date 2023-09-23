@@ -1509,6 +1509,7 @@ window.particlesJS = function (tag_id, params) {
     var body = document.body;
     canvas_el.style.width = body.clientWidth + "px";
     canvas_el.style.height = body.clientHeight + "px";
+    canvas_el.style.minHeight = "100vh";
 
     /* Find the <body> element and append canvas as the first child */
     body.insertBefore(canvas_el, body.firstChild);

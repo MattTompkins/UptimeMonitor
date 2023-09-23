@@ -7,6 +7,9 @@ use UptimeMonitor\Core\View;
 use UptimeMonitor\Core\DB;
 use UptimeMonitor\Core\Helpers;
 
+
+use GuzzleHttp\Psr7\Request;
+
 /**
  * Controller for managing websites
  */
@@ -62,6 +65,36 @@ class SiteController {
         
         header( 'Location: ' . APP_URL );
         return;
+    }
+
+    /**
+     * Show a single site & its monitors
+     *
+     * @return void
+     */
+    public static function showSite( $id ) {
+        // Get basic site info
+        $db = new DB;
+        $siteInfo = $db->execute( "SELECT * FROM `sites` WHERE `id` = ?", ['2'] )[0];
+        $db->close();
+
+        // Test the connection to provide initial data
+        $testRequest = [];
+        try {
+            $client = new \GuzzleHttp\Client();
+            $client->request( 'GET', $siteInfo['URL'], [
+                'on_stats' => function ( \GuzzleHttp\TransferStats $stats ) {
+                    $testRequest = $stats->getHandlerStats();
+                }
+            ]);
+        } catch ( Exception $e ) {
+        }
+
+        View::load( 'single-website', [ 
+            'page_title'   => $siteInfo['name'],
+            'site_info'    => $siteInfo,
+            'test_request' => $testRequest,
+        ]);
     }
 
     /**
