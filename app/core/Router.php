@@ -44,9 +44,11 @@ class Router {
         $requestPath = $requestUri['path'];
         $method = $_SERVER['REQUEST_METHOD'];
 
+
         $callback = null;
 
         foreach ( $this->handlers as $handler ) {
+          
             if ( $handler['path'] === $requestPath && $method === $handler['method'] ) {
                 $callback = $handler['handler'];
             }

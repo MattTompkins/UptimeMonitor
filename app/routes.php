@@ -13,6 +13,14 @@ $router->get('/', function() {
     View::load( 'dashboard' );
 });
 
+$router->get('/create-website', function() {
+    View::load( 'create-website' );
+});
+
+$router->post('/create-websites', function() {
+    echo 'test';
+});
+
 $router->get('/create-monitor', function() {
     View::load( 'dashboard' );
 });
