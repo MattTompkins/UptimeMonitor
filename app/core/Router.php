@@ -44,25 +44,31 @@ class Router {
         $requestPath = $requestUri['path'];
         $method = $_SERVER['REQUEST_METHOD'];
 
-
         $callback = null;
+        $params = [];
 
         foreach ( $this->handlers as $handler ) {
-          
-            if ( $handler['path'] === $requestPath && $method === $handler['method'] ) {
+            $pathPattern = preg_replace( '/\/\{\w+\}/', '/\w+', $handler['path'] );
+            $pathPattern = str_replace( '/', '\/', $pathPattern );
+
+            if ( preg_match('/^' . $pathPattern . '$/', $requestPath, $matches) && $method === $handler['method'] ) {
                 $callback = $handler['handler'];
+
+                // Extract route parameters from the matched path
+                $params = array_slice( $matches, 1 );
             }
         }
 
-        if ( ! $callback ) {
+        if ( !$callback ) {
             header( 'HTTP/1.0 404 Not Found' );
-            if ( ! empty( $this->notFoundHandler ) ) {
+            if ( !empty( $this->notFoundHandler ) ) {
                 $callback = $this->notFoundHandler;
             }
         }
 
         call_user_func_array( $callback, [
-            array_merge( $_GET, $_POST )
+            array_merge( $_GET, $_POST ),
+            $params // Pass route parameters as an additional argument
         ]);
     }
 }
