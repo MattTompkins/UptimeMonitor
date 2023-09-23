@@ -21,7 +21,7 @@ class SiteController {
      * @return void
      */
     public static function createSite() {
-        View::load( 'create-website', [ 'page_title' => 'Create a new site' ] );
+        View::load( 'create-website', [ 'pageTitle' => 'Create a new site' ] );
     }
 
     /**
@@ -38,7 +38,7 @@ class SiteController {
         if ( !filter_var( $url, FILTER_VALIDATE_URL ) ) {
             $errorMessage = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' ) . ' is not a valid URL! Please try again.';
             View::load('create-website', [
-                'page_title' => 'Create a new site',
+                'pageTitle' => 'Create a new site',
                 'message'    => $errorMessage,
             ]);
             return;
@@ -52,7 +52,7 @@ class SiteController {
         catch( Exception $e ) {
             $errorMessage = 'There was an issue connecting to the specified URL. Please try again.';
             View::load('create-website', [
-                'page_title' => 'Create a new site',
+                'pageTitle' => 'Create a new site',
                 'message'    => $errorMessage,
             ]);
             return;
@@ -75,7 +75,7 @@ class SiteController {
     public static function showSite( $id ) {
         // Get basic site info
         $db = new DB;
-        $siteInfo = $db->execute( "SELECT * FROM `sites` WHERE `id` = ?", ['2'] )[0];
+        $siteInfo = $db->execute( "SELECT * FROM `sites` WHERE `id` = ?", [$id] )[0];
         $db->close();
 
         // Test the connection to provide initial data
@@ -83,17 +83,21 @@ class SiteController {
         try {
             $client = new \GuzzleHttp\Client();
             $client->request( 'GET', $siteInfo['URL'], [
-                'on_stats' => function ( \GuzzleHttp\TransferStats $stats ) {
+                'on_stats' => function ( \GuzzleHttp\TransferStats $stats ) use ( &$testRequest ) {
                     $testRequest = $stats->getHandlerStats();
-                }
+                },
+                'timeout' => 5, 
             ]);
         } catch ( Exception $e ) {
+            if ( $e->getCode() === 0 && strpos( $e->getMessage(), 'cURL error' ) !== false ) {
+                $testRequest['http_code'] = '408 (5s+ timeout)';
+            }
         }
 
         View::load( 'single-website', [ 
-            'page_title'   => $siteInfo['name'],
-            'site_info'    => $siteInfo,
-            'test_request' => $testRequest,
+            'pageTitle'   => $siteInfo['name'],
+            'siteInfo'    => $siteInfo,
+            'testRequest' => $testRequest,
         ]);
     }
 

@@ -24,7 +24,7 @@ class Install
 
         View::load('dashboard', [ 
             'message'    => 'Installation has been successful. Database tables have been created.',
-            'page_title' => 'Install complete',
+            'pageTitle' => 'Install complete',
         ]);
     }
 }

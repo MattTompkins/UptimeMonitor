@@ -20,4 +20,16 @@ class Helpers {
         echo '</pre>';
     }
 
+    /**
+     * Convery Bytes per second to Kb/s
+     *
+     * @param [type] $bytesPerSecond
+     * @return void
+     */
+    public static function bytesPerSecondToKbps( $bytesPerSecond ) {
+        $conversionFactor = 8 / 1000; // 8 bits per Byte, 1000 bits per Kilobit
+        $kbps = $bytesPerSecond * $conversionFactor;
+        return $kbps;
+    }
+
 }

@@ -22,6 +22,6 @@ class DashboardController {
         $sites = $db->execute( "SELECT * FROM `sites`" );
         $db->close();
         
-        View::load( 'dashboard', [ 'page_title' => 'Uptime Monitor', 'sites' => $sites ] );
+        View::load( 'dashboard', [ 'pageTitle' => 'Uptime Monitor', 'sites' => $sites ] );
     }
 }

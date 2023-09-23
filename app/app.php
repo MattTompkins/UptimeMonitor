@@ -10,6 +10,8 @@ use UptimeMonitor\Core\View;
  */
 function runApp() {
     
+    date_default_timezone_set( TIMEZONE );
+
     // Test database connection
     try {
         new DB; 

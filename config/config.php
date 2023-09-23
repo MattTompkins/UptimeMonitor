@@ -6,6 +6,7 @@
 /* Application Data */
 define( 'APP_NAME', 'Uptime Monitor' );
 define( 'APP_URL' , 'http://uptime.test/' );
+define( 'TIMEZONE', 'Europe/London');
 
 /** Database */
 define( 'DBHOST','127.0.0.1' );
