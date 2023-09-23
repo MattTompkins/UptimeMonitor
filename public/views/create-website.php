@@ -27,7 +27,7 @@
         <section class="w-2/3 max-w-screen-xl px-4 mx-auto lg:px-12 mb-4">
             <div class="flex flex-col items-center py-6 bg-gray-800/25 backdrop-blur-md rounded-lg shadow md:flex-row">
 
-                <form method="POST" action="<?php echo APP_URL; ?>create-websites" class="px-5 w-full">
+                <form method="POST" action="<?php echo APP_URL; ?>create-websites" enctype="application/x-www-form-urlencoded" class="px-5 w-full">
                     <label class="text-gray-100 text-lg font-semibold mb-1">Give the site a name</label>
                     <div class="relative w-full mb-4 mt-1">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

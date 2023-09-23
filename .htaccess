@@ -1,11 +1,16 @@
 RewriteEngine On
 RewriteBase /
 
-# Force trailing slash on all URLs except those under /public/assets
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+# Force trailing slash on all GET URLs except those under /public/assets
+RewriteCond %{REQUEST_METHOD} =GET
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/public/assets/
 RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ /$1/ [L,R=301]
+
 
 # Redirect requests to index.php in /public directory
 RewriteCond %{REQUEST_URI} !^/public/
