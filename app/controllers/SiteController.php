@@ -2,6 +2,7 @@
 
 namespace UptimeMonitor\Controllers;
 
+use Exception;
 use UptimeMonitor\Core\View;
 use UptimeMonitor\Core\DB;
 use UptimeMonitor\Core\Helpers;
@@ -33,6 +34,20 @@ class SiteController {
        // Validate URL is correct
         if ( !filter_var( $url, FILTER_VALIDATE_URL ) ) {
             $errorMessage = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' ) . ' is not a valid URL! Please try again.';
+            View::load('create-website', [
+                'page_title' => 'Create a new site',
+                'message'    => $errorMessage,
+            ]);
+            return;
+        }
+
+        // Attempt to contact site via Guzzle
+        try {
+            $client = new \GuzzleHttp\Client();
+            $client->request( 'GET', $url );
+        }
+        catch( Exception $e ) {
+            $errorMessage = 'There was an issue connecting to the specified URL. Please try again.';
             View::load('create-website', [
                 'page_title' => 'Create a new site',
                 'message'    => $errorMessage,
